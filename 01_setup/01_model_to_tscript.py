@@ -9,7 +9,7 @@ model.fc = torch.nn.Linear(512, 6)
 torch.save(model.state_dict(), "model_with_pretrained_weights.bin")
 
 # Load the saved model
-model.load_state_dict(torch.load("model_with_pretrained_weights.bin"), map_location=torch.device('cpu'))
+model.load_state_dict(torch.load("model_with_pretrained_weights.bin", map_location=torch.device('cpu')))
 
 # Switch the model to eval mode
 model.eval()
