@@ -1,12 +1,17 @@
 import torch
 import torchvision
 
-# An instance of your model.
-model = torchvision.models.resnet34(weights=None)
-model.fc = torch.nn.Linear(512,6)
-model.load_state_dict(torch.load("model.bin"), map_location=torch.device('cpu'))
-    
-# Switch the model to eval model
+# An instance of your model with pretrained ImageNet weights.
+model = torchvision.models.resnet34(pretrained=True)
+model.fc = torch.nn.Linear(512, 6)
+
+# Save the model with pretrained weights
+torch.save(model.state_dict(), "model_with_pretrained_weights.bin")
+
+# Load the saved model
+model.load_state_dict(torch.load("model_with_pretrained_weights.bin"), map_location=torch.device('cpu'))
+
+# Switch the model to eval mode
 model.eval()
 
 # An example input you would normally provide to your model's forward() method.
